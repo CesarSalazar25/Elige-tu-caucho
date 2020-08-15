@@ -1,0 +1,241 @@
+<br>
+<div class="createProduct">
+    <button (click)="OpenCreate(Create)" class=" btn btn-success" type="button">
+    	<b>Nuevo producto</b>&nbsp;
+    	<i class="fas fa-pencil-alt"></i>
+	</button>
+</div>
+<br>
+<div class="container-fluid text-center">
+    <button type="button" class="btn btn-primary" (click)="this.getProducts()">
+        <b>Cauchos&nbsp;</b>
+        <i class="fas fa-car-side"></i>
+    </button>
+    <button type="button" class="btn btn-danger" (click)="this.getAccesorios()">
+        <b>Repuestos&nbsp;</b>
+        <i class="fas fa-cog"></i>
+    </button>
+</div>
+
+<div class="container-fluid">
+	<div class="container text-center" *ngIf="products<=0">
+	  <h3>
+		<br><br>
+		<i class="far fa-frown-open fa-3x"></i>
+		<br><br>
+		<b>No hay artículos en el catálogo actualmente...</b>
+	  </h3>
+	</div>
+    <div class="row mt-3">
+        <div class="col-sm-4 pt-3" *ngFor="let product of products">
+            <app-card [Product]="product"></app-card>
+        </div>
+    </div>
+</div>
+<br><br>
+
+<ng-template #Create>
+    <div class="modal-header">
+        <h4 *ngIf="isCaucho" class="modal-title pull-left"><b>Formulario para nuevo producto (Caucho)</b></h4>
+        <h4 *ngIf="!isCaucho" class="modal-title pull-left"><b>Formulario para nuevo producto (Repuesto)</b></h4>
+        <button type="button" class="close pull-right" aria-label="Close" (click)="declineCreate()">
+        <span aria-hidden="true">&times;</span></button>
+    </div>
+    <div class="modal-body">
+
+        <div class="container-fluid text-center">
+            <form #cf="ngForm" class="form" id="CreateForm">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <carousel [showIndicators]="showIndicator" [noPause]="false" [noWrap]="noWrapSlides">
+                          <slide>
+                            <img class="card-img" *ngIf="this.imageUrl==null" class="rounded" loading="lazy" src="/assets/images/imagen-no-disponible.png" style="display: block; width: 100%;" alt="Card image">
+                            <img class="card-img" *ngIf="this.imageUrl!=null" class="rounded" loading="lazy" src="{{this.imageUrl}}" style="display: block; width: 100%;" alt="Card image">
+                            <small>Seleccione la foto #1 para el producto</small>
+                            <br>
+                            <div class="container">
+
+                                <progressbar [value]="uploadProgress| async" type="primary" [striped]="true" [animate]="true"></progressbar>
+
+                                <div class="item">
+                                    {{ (uploadProgress | async) / 100 | percent }}
+                                </div>
+                                <br>
+
+                                <div class="item">
+
+                                    <input #inputFile class="hidden" type="file" (change)="upload($event)" accept=".png,.jpg,.jpeg">
+
+                                    <button type="button" class="btn btn-lg btn-success" (click)="inputFile.click();isPic1()">
+                                                    Subir foto
+                                                    <i class="fas fa-upload"></i>
+                                    </button><br><br>
+                                </div>
+                            </div>
+                          </slide>
+                          <slide>
+                                <img class="card-img" *ngIf="this.imageUrl2==null" class="rounded" loading="lazy" src="/assets/images/imagen-no-disponible.png" style="display: block; width: 100%;" alt="Card image">
+                                <img class="card-img" *ngIf="this.imageUrl2!=null" class="rounded" loading="lazy" src="{{this.imageUrl2}}" style="display: block; width: 100%;" alt="Card image">
+                                <small>Seleccione la foto #2 para el producto</small>
+                                <br>
+                                <div class="container">
+
+                                    <progressbar [value]="uploadProgress2| async" type="primary" [striped]="true" [animate]="true"></progressbar>
+
+
+                                    <div class="item">
+                                        {{ (uploadProgress2 | async) / 100 | percent }}
+                                    </div>
+                                    <br>
+
+
+                                    <div class="item">
+
+                                        <input #inputFile class="hidden" type="file" (change)="upload($event)" accept=".png,.jpg,.jpeg">
+
+                                        <button type="button" class="btn btn-lg btn-success" (click)="inputFile.click();isPic2()">
+                                                        Subir foto
+                                                        <i class="fas fa-upload"></i>
+                                        </button><br><br>
+                                    </div>
+                                </div>
+                          </slide>
+                          <slide>
+                                <img class="card-img" *ngIf="this.imageUrl3==null" class="rounded" loading="lazy" src="/assets/images/imagen-no-disponible.png" style="display: block; width: 100%;" alt="Card image">
+                                <img class="card-img" *ngIf="this.imageUrl3!=null" class="rounded" loading="lazy" src="{{this.imageUrl3}}" style="display: block; width: 100%;" alt="Card image">
+                                <small>Seleccione la foto #3 para el producto</small>
+                                <br>
+                                <div class="container">
+
+                                    <progressbar [value]="uploadProgress3| async" type="primary" [striped]="true" [animate]="true"></progressbar>
+
+
+                                    <div class="item">
+                                        {{ (uploadProgress3 | async) / 100 | percent }}
+                                    </div>
+                                    <br>
+
+
+                                    <div class="item">
+
+                                        <input #inputFile class="hidden" type="file" (change)="upload($event)" accept=".png,.jpg,.jpeg">
+
+                                        <button type="button" class="btn btn-lg btn-success" (click)="inputFile.click();isPic3()">
+                                                        Subir foto
+                                                        <i class="fas fa-upload"></i>
+                                        </button><br><br>
+                                    </div>
+                                </div>
+                          </slide>
+                        </carousel>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="tab-content">
+
+                            <h5><b>Datos Generales</b></h5><hr>
+
+                            <div class="form-group">
+                                <div class="col-xs-6">
+                                    <label for="name"><h6><b>Nombre</b></h6></label>
+                                    <input [(ngModel)]="newProduct.name" #name="ngModel" ngModel type="text" class="form-control" name="name" id="name" placeholder="Nombre del producto">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-xs-6">
+                                    <label for="marca"><h6><b>Marca</b></h6></label>
+                                    <input [(ngModel)]="newProduct.marca" #marca="ngModel" ngModel type="text" class="form-control" name="marca" id="marca" placeholder="Marca del producto">
+                                </div>
+                            </div>
+
+                            <div *ngIf="!isCaucho" class="form-group">
+                                <div class="col-xs-6">
+                                    <label for="part"><h6><b>N° de parte</b></h6></label>
+                                    <input [(ngModel)]="newProduct.part" #part="ngModel" ngModel type="text" class="form-control" name="part" id="part" placeholder="Número de parte">
+                                </div>
+                            </div>
+
+                            <div *ngIf="isCaucho" class="form-group">
+                                <div class="col-xs-6">
+                                    <label for="modelo"><h6><b>Modelo</b></h6></label>
+                                    <input [(ngModel)]="newProduct.modelo" #modelo="ngModel" ngModel type="text" class="form-control" name="modelo" id="modelo" placeholder="Modelo del producto">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-xs-6">
+                                    <label for="precio"><h6><b>Precio</b></h6></label>
+                                    <input [(ngModel)]="newProduct.price" #precio="ngModel" ngModel type="number" class="form-control" name="precio" id="precio" placeholder="Introduzca el precio">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div><br>
+
+                <h5><b>Descripción del producto</b></h5><hr>
+                <div class="form-group">
+                    <div class="col-xs-6">
+                        <label for="descripcion"><h6><b>Características</b></h6></label>
+                        <textarea [(ngModel)]="newProduct.descrition" #descripcion="ngModel" ngModel type="text" class="form-control" name="descripcion" id="descripcion" placeholder="Características del producto"></textarea>
+                    </div>
+                </div>
+
+                <div *ngIf="!isCaucho" class="form-group">
+                    <div class="col-xs-6">
+                        <label for="vehicle"><h6><b>¿Para qué vehículo aplica?</b></h6></label>
+                        <textarea [(ngModel)]="newProduct.vehicle" #vehicle="ngModel" ngModel type="text" class="form-control" name="vehicle" id="vehicle" placeholder="..."></textarea>
+                    </div>
+                </div>
+
+                <div *ngIf="!isCaucho">
+                  <br><h5><b>¿Qué tipo de repuesto es?</b></h5><hr>
+                  <div class="form-group">
+                    <label for="categoria"><h4>Categoria</h4></label><br>
+                      <select class="browser-default custom-select" name="categoria" [(ngModel)]="newProduct.categoria">
+                        <option value="Tren">Tren Delantero</option>
+                        <option value="Amortiguadores">Amortiguadores</option>
+                        <option value="Frenos">Frenos</option>
+                        <option value="Filtros">Filtros</option>
+                        <option value="Croches">Croches</option>
+                        <option value="Otros">Otros</option>
+                      </select>
+                  </div>
+                  <br><br>
+                </div>
+
+                <div *ngIf="isCaucho" class="form-group">
+                    <div class="col-xs-6">
+                        <label for="benefits"><h6><b>Beneficios</b></h6></label>
+                        <textarea [(ngModel)]="newProduct.benefits" #benefits="ngModel" ngModel type="text" class="form-control" name="benefits" id="benefits" placeholder="Beneficios del producto"></textarea>
+                    </div>
+                </div>
+
+                <div *ngIf="isCaucho" class="form-group">
+                    <div class="col-xs-6">
+                        <label for="treadwear"><h6><b>Desgaste de Banda de Rodamiento</b></h6></label>
+                        <input [(ngModel)]="newProduct.treadwear" #treadwear="ngModel" ngModel type="text" class="form-control" name="treadwear" id="treadwear" placeholder="Treadwear">
+                    </div>
+                </div>
+
+                <div *ngIf="isCaucho" class="form-group">
+                    <div class="col-xs-6">
+                        <label for="traction"><h6><b>Tracción</b></h6></label>
+                        <input [(ngModel)]="newProduct.traction" #traction="ngModel" ngModel type="text" class="form-control" name="traction" id="traction" placeholder="Tracción">
+                    </div>
+                </div>
+
+                <div *ngIf="isCaucho" class="form-group">
+                    <div class="col-xs-6">
+                        <label for="temperature"><h6><b>Temperatura</b></h6></label>
+                        <input [(ngModel)]="newProduct.temperature" #temperature="ngModel" ngModel type="text" class="form-control" name="temperature" id="temperature" placeholder="Temperatura">
+                    </div>
+                </div>
+                <button class="btn btn-primary" (click)="createProduct(cf)">Añadir producto
+                        <i class="fas fa-pencil-alt"></i>
+                </button>
+                <button class="btn btn-cancelar btn-danger" (click)="declineCreate()">Cancelar
+                        <i class="far fa-times-circle"></i>
+                </button>
+            </form>
+        </div>
+    </div>
+</ng-template>

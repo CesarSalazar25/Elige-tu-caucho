@@ -1,0 +1,58 @@
+<br>
+<div class="container-fluid text-center">
+    <h5 class="card-title"><b>¿Qué productos ofrecemos?</b></h5>
+    <carousel [interval]="1500">
+      <slide>
+        <img src="assets/images/Cauchos_Continental.png" alt="first slide" loading="lazy" style="display: block; width: 100%;">
+      </slide>
+      <slide>
+        <img src="assets/images/Cauchos_General.png" alt="first slide" loading="lazy" style="display: block; width: 100%;">
+      </slide>
+      <slide>
+        <img src="assets/images/Repuestos.png" alt="first slide" loading="lazy" style="display: block; width: 100%;">
+      </slide>
+    </carousel>
+    <br>
+    <a (click)="goShop()" class="btn btn-danger active" role="button" aria-pressed="true">
+      <i class="fas fa-shopping-cart"></i>&nbsp;Ver catálogo
+    </a>
+</div>
+<br><hr>
+
+<div class="container" style="width: 100%;">
+	<h5 class="card-title" style="text-align: center;"><b>¿Cómo adquirir nuestros productos?</b></h5>
+	<div class="row">
+	  <div class="col-sm-6">
+		<div class="card">
+		  <div class="card-body">
+			<h5 class="card-title"><i class="fas fa-search"></i>&nbsp;Busca y selecciona</h5>
+			<p class="card-text">Revise y descubra la variedad de artículos que ofrecemos.</p>
+		  </div>
+		</div>
+	  </div>
+	  <div class="col-sm-6">
+		<div class="card">
+		  <div class="card-body">
+			<h5 class="card-title"><i class="fas fa-headset"></i>&nbsp;Atención personalizada</h5>
+			<p class="card-text">Pregunte sin compromiso por el sistema de mensajes del sitio.</p>
+		  </div>
+		</div>
+	  </div>
+	  <div class="col-sm-6">
+		<div class="card">
+		  <div class="card-body">
+			<h5 class="card-title"><i class="fas fa-shipping-fast"></i>&nbsp;Confirma y paga</h5>
+			<p class="card-text">Concrete el pago y envío del producto.</p>
+		  </div>
+		</div>
+	  </div>
+	  <div class="col-sm-6">
+		<div class="card">
+		  <div class="card-body">
+			<h5 class="card-title"><i class="fas fa-car"></i>&nbsp;¡Disfrute!</h5>
+			<p class="card-text">Instale y renueve su vehículo.</p>
+		  </div>
+		</div>
+	  </div>
+	</div>
+</div><br>

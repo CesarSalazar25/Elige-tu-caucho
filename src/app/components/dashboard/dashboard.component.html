@@ -1,0 +1,38 @@
+<header>
+    <app-navbar></app-navbar>
+</header>
+
+<section>
+    <article>
+        <router-outlet></router-outlet>
+    </article>
+</section>
+
+<footer>
+  <div class="py-3">
+    <div class="container">
+      <div class="row">
+        <div class="container-fluid col-md-4 p-3"> 
+        	<img src="/assets/images/Logo.png" alt="Logo"> 
+        </div>
+        <div class="container-fluid col-md-4 p-3">
+          <p> <a class="nav-link" [routerLink]="['home']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"><i class="fas fa-home"></i>&nbsp;Home</a> </p>
+
+          <p> <a class="nav-link" [routerLink]="['shop']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"><i class="fas fa-shopping-bag"></i>&nbsp;Catálogo</a> </p>
+
+          <p class="mb-0"> <a class="nav-link" [routerLink]="['faq']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"><i class="fas fa-info-circle"></i>&nbsp;Preguntas Frecuentes</a>  </p>
+        </div>
+        <div class="container-fluid col-md-4 p-3">
+          <h5> <b>¿Quiénes somos?</b> </h5>
+          <p class="mb-0"> Somos una empresa especializada en la venta de cauchos de las marcas General Tier y Continental, al igual que de todo tipo de repuestos.</p>
+        </div>
+      </div>
+      <hr>
+      <div class="row">
+        <div class="col-md-12 text-center">
+          <p class="mb-0 mt-2"><small>© 2019 Elige tu Caucho. All rights reserved</small></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>

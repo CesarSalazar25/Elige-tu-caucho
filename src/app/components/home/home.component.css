@@ -1,0 +1,32 @@
+@media (max-width: 1366px) 
+{
+    img {
+        height: 200px;
+    }
+}
+
+@media (max-width: 414px) {
+    img {
+        height: 120px;
+    }
+}
+
+@media (min-width: 1400px) {
+    img {
+        height: 200px;
+    }
+}
+
+img {
+    width: 640px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.card-title {
+  color: #dc3545;
+}
+
+b {
+  text-align: center;
+}

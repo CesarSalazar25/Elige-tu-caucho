@@ -1,0 +1,197 @@
+<br>
+<div class="container-fluid text-center">
+    <button type="button" class="btn btn-primary" (click)="getProducts()">
+		<b>Cauchos&nbsp;</b>
+		<i class="fas fa-car-side"></i>
+	</button>
+    <button type="button" class="btn btn-danger" (click)="getAccesorios()">
+		<b>Repuestos&nbsp;</b>
+		<i class="fas fa-cog"></i>
+	</button>
+    <button type="button" class="btn btn-info" (click)="Mensaje()">
+		<b>Mensaje&nbsp;</b>
+		<i class="far fa-envelope"></i>
+	</button>
+
+  <hr>
+
+  <div class="container-fluid text-center" *ngIf="!isCaucho && mensaje == false">
+  		<button type="button" class="btn btn-dark btn-outline" (click)="getTren()">
+  			<b>Tren delantero</b>
+  		</button>
+  		<button type="button" class="btn btn-dark btn-outline" (click)="getAmortiguador()">
+  			<b>Amortiguadores</b>
+  		</button>
+  		<button type="button" class="btn btn-dark btn-outline" (click)="getFreno()">
+  			<b>Frenos</b>
+  		</button>
+  		<button type="button" class="btn btn-dark btn-outline" (click)="getCroche()">
+  			<b>Croche</b>
+  		</button>
+  		<button type="button" class="btn btn-dark btn-outline" (click)="getFiltro()">
+  			<b>Filtros</b>
+  		</button>
+  		<button type="button" class="btn btn-dark btn-outline" (click)="getOtro()">
+  			<b>Otros</b>
+  		</button>
+  		<br><br>
+  	</div>
+
+	<div class="container" *ngIf="mensaje == false">
+	  <form style="display: flex;">
+		  <button class="btn btn-dark" type="submit">
+			<i class="fas fa-search"></i>
+		</button>
+		  <input class="form-control col s6" [(ngModel)]="searchterm" (ngModelChange)="search($event)" type="search" placeholder="Búsqueda" aria-label="Search" name="searchInput">
+	  </form>
+	</div>
+
+
+<div class="container-fluid" *ngIf="mensaje == false">
+  <div class="container-fluid text-center" *ngIf="products<=0">
+      <h3 class="background">
+        <br><br><br>
+        <i class="far fa-frown-open fa-3x"></i>
+        <br><br>
+        <b>No hay artículos en el catálogo actualmente...</b>
+      </h3>
+	  <br><br><br>
+  </div>
+    <div class="row mt-3">
+        <div class="col-sm-4 pt-3" *ngFor="let product of products; let i = index">
+          <app-card [ArrayIndex]="i" [Product]="product" [WhatAmI]="isCaucho" *ngIf="product.disponibility == true"></app-card>
+        </div>
+    </div>
+    <br><br>
+</div>
+
+<div *ngIf="mensaje == true">
+    <form #MessageForm="ngForm" class="form" id="CreateForm" style="text-align: center;">
+        <div class="card message">
+            <div class="col-xs-7">
+                <h6>Pregúntenos sobre si desea adquirir alguno de los artículos de nuestro catálogo. <br> Debe rellenar todos los datos indicados.</h6>
+            </div>
+            <hr>
+			<h3 class="title">Datos de contacto</h3><br>
+            <div class="form-group">
+                <div class="col-xs-6">
+                    <label for="name"><h4>Nombre</h4></label>
+                    <input [(ngModel)]="message.name" #name="ngModel" ngModel type="text" class="form-control" name="name"
+                    id="name" [ngClass]="{'is-invalid':name.errors!=null && name.touched, 'is-valid':name.errors==null}"
+                    required minlength="3" placeholder=" Escribe tu nombre... ">
+
+                    <div class="invalid-feedback">
+                        <div *ngIf="name.errors?.required">
+                            <small>Este campo es requerido.</small>
+                        </div>
+                        <div *ngIf="name.errors?.minlength">
+                            <small>El nombre debe tener al menos {{name.errors.minlength.requiredLength}} carácteres.</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-xs-6">
+                    <label for="name"><h4>Correo</h4></label>
+                    <input [(ngModel)]="message.email" #email="ngModel" ngModel type="text" class="form-control" name="email"
+                    id="email" [ngClass]="{'is-invalid':email.errors!=null && email.touched, 'is-valid':email.errors==null}"
+                    required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" placeholder=" ejemplo@email.com ">
+
+                    <div class="invalid-feedback">
+                        <div *ngIf="email.errors?.required">
+                            <small>Este campo es requerido.</small>
+                        </div>
+                        <div *ngIf="email.errors?.pattern">
+                            <small>Debe cumplir con un patrón de correo electrónico (ej: micorreo@example.com).</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-xs-6">
+                    <label for="name"><h4>Teléfono</h4></label>
+                    <input [(ngModel)]="message.number" #number="ngModel" ngModel type="text" class="form-control" name="number"
+                    id="number" [ngClass]="{'is-invalid':number.errors!=null && number.touched, 'is-valid':number.errors==null}"
+                    required pattern="^[0-9-+s()]*$" placeholder=" +584149999999 ">
+
+                    <div class="invalid-feedback">
+                        <div *ngIf="number.errors?.required">
+                            <small>Este campo es requerido.</small>
+                        </div>
+                        <div *ngIf="number.errors?.pattern">
+                            <small>Debe cumplir con un patrón de n° telefónico (ej:+58 414 999 99 99).</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+			<hr>
+			<h3 class="title">Datos del vehículo</h3><br>
+			<div class="form-group">
+				<div class="row">
+				  <div class="col-sm-6">
+					<div class="col-xs-6">
+						<label for="rin"><h4>Rin</h4></label>
+						<input [(ngModel)]="message.rin" #rin="ngModel" ngModel type="text" class="form-control" name="rin" required id="rin"
+                        [ngClass]="{'is-invalid':rin.errors!=null && rin.touched, 'is-valid':rin.errors==null}" placeholder=" Escribe el rin del caucho... ">
+
+						<div class="invalid-feedback">
+							<div *ngIf="rin.errors?.required">
+								<small>Este campo es requerido.</small>
+							</div>
+						</div>
+					</div>
+				  </div>
+				  <div class="col-sm-6">
+					<div class="col-xs-6">
+					<br class="space">
+						<label for="model"><h4>Marca</h4></label>
+						<input [(ngModel)]="message.marca" #marca="ngModel" ngModel type="text" class="form-control" name="marca"
+						id="marca" [ngClass]="{'is-invalid':marca.errors!=null && marca.touched, 'is-valid':marca.errors==null}"
+						required placeholder=" Ejemplo: Toyota">
+
+						<div class="invalid-feedback">
+							<div *ngIf="marca.errors?.required">
+								<small>Este campo es requerido.</small>
+							</div>
+						</div>
+					</div>
+				  </div>
+				</div>
+        <br>
+        <div class="col-xs-6">
+        <br class="space">
+          <label for="model"><h4>Modelo</h4></label>
+          <input [(ngModel)]="message.model" #model="ngModel" ngModel type="text" class="form-control" name="model"
+          id="model" [ngClass]="{'is-invalid':model.errors!=null && model.touched, 'is-valid':model.errors==null}"
+          required placeholder=" Ejemplo: Corolla 2006">
+
+          <div class="invalid-feedback">
+            <div *ngIf="model.errors?.required">
+              <small>Este campo es requerido.</small>
+            </div>
+          </div>
+        </div>
+            </div>
+			<hr>
+            <div class="form-group">
+                <div class="col-xs-6">
+                    <label for="descripcion"><h4>Mensaje</h4></label>
+                    <textarea [(ngModel)]="message.text" #text="ngModel" ngModel type="text" class="form-control" name="text"
+                    id="text" [ngClass]="{'is-invalid':text.errors!=null && text.touched, 'is-valid':text.errors==null}" required
+                    placeholder="Escribe aquí tu mensaje..."></textarea>
+
+                    <div class="invalid-feedback">
+                        <div *ngIf="text.errors?.required">
+                            <small>Este campo es requerido.</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br>
+        <button (click)="sendMessage()" [disabled]="message.text=='' || message.email == '' || message.name=='' || number.errors != null " class="btn btn-danger" type="button">
+            <i class="fas fa-share-square"></i> Enviar mensaje
+        </button>
+    </form>
+    <br>
+</div>

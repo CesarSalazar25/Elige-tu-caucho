@@ -1,0 +1,66 @@
+<div class="card">
+  <div class="card-body">
+    <img src="assets/images/preguntas_frecuentes.png" alt="Preguntas Frecuentes">
+    <br>
+    <h5 class="card-title"><i class="far fa-handshake"></i>&nbsp;General</h5>
+    <hr>
+    <button type="button" class="btn btn-danger" (click)="isCollapsed = !isCollapsed"
+        [attr.aria-expanded]="!isCollapsed" aria-controls="collapseBasic">
+        <b>¿Entregan factura fiscal?</b>
+    </button>
+    <div id="collapseBasic" [collapse]="isCollapsed" [isAnimated]="true">
+      <div class="well well-lg card card-block card-header">
+        <p>Sí. Somos una empresa legalmente constituida y cumplimos con nuestras obligaciones fiscales y tributarias. Las facturas emitidas por nuestra compañía son exclusivamente en moneda local y para personas naturales.</p>
+        </div>
+    </div>
+    <br><br>
+
+    <h5 class="card-title"><i class="fas fa-shipping-fast"></i>&nbsp;Envíos</h5>
+    <hr>
+    <button type="button" class="btn btn-danger" (click)="isCollapsed2 = !isCollapsed2"
+        [attr.aria-expanded]="!isCollapsed2" aria-controls="collapseBasic">
+        <b>¿Realizan envíos a nivel nacional?</b>
+    </button>
+    <div id="collapseBasic" [collapse]="isCollapsed2" [isAnimated]="true">
+      <div class="well well-lg card card-block card-header">
+        <p>Sí, los envíos a nivel nacional los realizamos a través de la empresa Aerocav ya que tenemos convenios con dicha empresa. También podemos realizar envíos por una encomienda de su preferencia.</p>
+      </div>
+    </div>
+    <br><br>
+
+    <button type="button" class="btn btn-danger" (click)="isCollapsed3 = !isCollapsed3"
+        [attr.aria-expanded]="!isCollapsed3" aria-controls="collapseBasic">
+        <b>¿Puedo retirar los cauchos personalmente?</b>
+    </button>
+    <div id="collapseBasic" [collapse]="isCollapsed3" [isAnimated]="true">
+      <div class="well well-lg card card-block card-header">
+      <p>Sí, al comprar un artículo con nosotros le ofrecemos la posibilidad de retirar su pedido en Caracas y uno de nuestros servidores se pondrá en contacto con usted.</p>
+        </div>
+    </div>
+    <br><br>
+
+    <h5 class="card-title"><i class="fas fa-dolly"></i>&nbsp;Órdenes</h5>
+    <hr>
+    <button type="button" class="btn btn-danger" (click)="isCollapsed4 = !isCollapsed4"
+        [attr.aria-expanded]="!isCollapsed4" aria-controls="collapseBasic">
+        <b>¿Los cauchos tienen garantía?</b>
+    </button>
+    <div id="collapseBasic" [collapse]="isCollapsed4" [isAnimated]="true">
+      <div class="well well-lg card card-block card-header">
+        <p>Contamos con 3 meses de garantía la cual es proporcionada por escrito.</p>
+        </div>
+    </div>
+    <br><br>
+
+    <h5 class="card-title"><i class="fas fa-exclamation-circle"></i>&nbsp;Otras dudas</h5>
+    <hr>
+    <div class="card card-block card-header">
+        <p>Cualquier duda que no esté específicada en esta sección puede escribirnos por la sección de <b>Mensajes</b>
+        del presente catálogo y lo atenderemos lo más pronto posible.</p>
+        <br>
+        <a (click)="goShop()" class="btn btn-danger active" role="button" aria-pressed="true">
+            <i class="fas fa-shopping-cart"></i>&nbsp;Ver catálogo
+        </a>
+    </div>
+  </div>
+</div>

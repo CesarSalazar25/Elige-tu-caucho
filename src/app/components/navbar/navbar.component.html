@@ -1,0 +1,137 @@
+<div *ngIf="auth.User | async; then authenticated; else notauthenticated"></div>
+
+<ng-template #notauthenticated>
+
+    <nav class="navbar navbar-expand-md navbar-dark">
+      <div class="container-fluid when-collapse">
+
+        <a class="navbar-brand d-none d-md-block">
+            <img src="/assets/images/Logo.png" (click)="goShop()" alt="Logo">
+        </a>
+
+        <button class="navbar-toggler navbar-toggler-right border-0 text-center" type="button" (click)="isCollapsed = !isCollapsed" data-toggle="collapse" data-target="#navbar13" aria-expanded="true">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+            <div class="collapse navbar-collapse hamburger" [collapse]="isCollapsed" id="navbar13">
+
+              <div [collapse]="isCollapsed"></div>
+                <ul class="navbar-nav mx-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" [routerLink]="['home']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+                            <i class="fas fa-home"></i>&nbsp;Inicio
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" [routerLink]="['shop']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+                            <i class="fas fa-shopping-bag"></i>&nbsp;Catálogo
+                        </a>
+                    </li>
+                    <li class="nav-item"> <a class="nav-link" [routerLink]="['faq']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+                      <i class="fas fa-info-circle"></i>&nbsp;Información
+            </a> </li>
+                </ul>
+                <ul class="navbar-nav text-center justify-content-end">
+                    <li class="nav-item" style="min-width: 20vw;">
+                        <a class="nav-link" (click)="openModal(template)" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+                            <i class="fab fa-expeditedssl"></i>&nbsp;¡Sólo personal autorizado!
+
+                            <ng-template #template>
+                                <div class="modal-header">
+                                    <h4 class="modal-title pull-left">Acceso de Administrador</h4>
+                                    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
+                                </div>
+                                <div class="modal-body">
+                                    Introduzca sus credenciales:
+                                    <br><br>
+
+                                    <form *ngIf="!isforgot" (ngSubmit)="login(f)" #f="ngForm" novalidate="">
+
+                                        <input type="text" id="email" name="email" class="form-control" #email="ngModel" ngModel [ngClass]="{'is-invalid':email.errors!=null && email.touched, 'is-valid':email.errors==null}" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" placeholder="Correo electrónico">
+                                        <div *ngIf="email.valid" class="valid-feedback"></div>
+                                        <br>
+
+                                        <input type="password" class="form-control" id="password" name="password" #password="ngModel" ngModel placeholder="Contraseña" [ngClass]="{'is-invalid':password.errors!=null && password.touched, 'is-valid':password.errors==null}" required minlength="6">
+                                        <div *ngIf="password.valid" class="valid-feedback"></div>
+
+                                        <hr>
+                                        <div class="col-m-12">
+                                            <br>
+                                            <button class="btn btn-success" [disabled]="!f.valid" type="submit">Acceder
+                                    <i class="fas fa-sync-alt"></i>
+                            </button>
+                                            <button class="btn btn-cancelar btn-danger" (click)="modalRef.hide()">Cancelar
+                                    <i class="far fa-times-circle"></i>
+                            </button>
+                                        </div>
+                                        <br>
+                                         <button class="btn btn-primary" (click)="isforgotten()">¿Olvidaste tu contraseña?</button>
+                                    </form>
+
+                                    <form *ngIf="isforgot" (ngSubmit)="forgot(f)" #f="ngForm" novalidate="">
+
+                                        <input type="text" id="email" name="email" class="form-control" #email="ngModel" ngModel [ngClass]="{'is-invalid':email.errors!=null && email.touched, 'is-valid':email.errors==null}" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" placeholder="Correo electrónico">
+                                        <div *ngIf="email.valid" class="valid-feedback"></div>
+
+                                        <hr>
+                                        <div class="col-m-12">
+                                            <button class="btn btn-success" [disabled]="!f.valid" type="submit">Restablecer contraseña
+                                    <i class="fas fa-sync-alt"></i>
+                            </button>
+                                            <button class="btn btn-cancelar btn-danger" (click)="notforgotten()">Cancelar
+                                    <i class="far fa-times-circle"></i>
+                            </button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </ng-template>
+
+                        </a>
+                    </li>
+
+                </ul>
+        </div>
+      </div>
+    </nav>
+</ng-template>
+
+<ng-template #authenticated>
+
+    <nav class="navbar navbar-expand-md navbar-dark">
+        <div class="container"> <button class="navbar-toggler navbar-toggler-right border-0" type="button" data-toggle="collapse" data-target="#navbar14" (click)="isCollapsed = !isCollapsed" aria-expanded="true">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse hamburger" [collapse]="isCollapsed" id="navbar14">
+
+              <div *ngIf="isCollapsed"><br><br></div>
+                <a class="navbar-brand d-none d-md-block">
+                    <img src="/assets/images/Logo.png" alt="Logo">
+                </a>
+                <ul class="navbar-nav mx-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" [routerLink]="['admin']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+                            <i class="fas fa-toolbox"></i>&nbsp;Administración
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" [routerLink]="['message']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+                            <i class="fas fa-envelope-open"></i>
+                            <span class="badge">{{unreadMessage}}</span>&nbsp;Mensajería
+                        </a>
+                    </li>
+                </ul>
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" (click)="auth.signOut()" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+                            <i class="fas fa-sign-out-alt"></i>&nbsp;Cerrar sesión
+                        </a>
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+    </nav>
+</ng-template>

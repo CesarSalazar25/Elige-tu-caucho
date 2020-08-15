@@ -1,0 +1,32 @@
+label {
+    background-color: #dc3545;
+}
+
+h2 {
+    text-align: center;
+    color: #dc3545;
+    font-size: 300%;
+}
+
+h3 {
+  color: #9b948c;
+}
+
+.modal-header
+{
+    background: #dc3545;
+		color: antiquewhite;
+}
+
+
+.modal-body {
+    text-align: center;
+}
+
+.btn-cancelar {
+    margin-left: 10px;
+}
+
+.unread {
+  color: #dc3545;
+}

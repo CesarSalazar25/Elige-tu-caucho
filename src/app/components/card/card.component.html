@@ -1,0 +1,464 @@
+<script type="text/javascript" src="hoverScript.js"></script>
+
+<div *ngIf="auth.User | async; then authenticated; else notauthenticated"></div>
+
+<ng-template #notauthenticated>
+    <div class="card-deck">
+        <div class="card text-center">
+            <div class="card-header">
+              <b *ngIf="!estado">
+                {{Product.name}}
+              </b>
+              <b *ngIf="estado">
+                {{Product.name}}<br>
+                {{Product.marca}}<br>
+                {{Product.modelo}}
+              </b>
+            </div>
+            <div class="container-fluid">
+				<carousel>
+				  <slide *ngIf="Product.photoUrl!=''">
+					<img src="{{Product.photoUrl}}" alt="first slide" loading="lazy" style="display: block; width: 100%;">
+				  </slide>
+				  <slide *ngIf="Product.photoUrl2!=''">
+					<img src="{{Product.photoUrl2}}" alt="second slide" loading="lazy" style="display: block; width: 100%;">
+				  </slide>
+				  <slide *ngIf="Product.photoUrl3!=''">
+					<img src="{{Product.photoUrl3}}" alt="third slide" loading="lazy" style="display: block; width: 100%;">
+				  </slide>
+				  <slide *ngIf="Product.photoUrl=='' && Product.photoUrl2=='' && Product.photoUrl3==''">
+					<img src="/assets/images/imagen-no-disponible.png" loading="lazy" alt="Sin imagen" style="display: block; width: 100%;">
+				  </slide>
+				</carousel>
+            </div>
+            <div class="card-footer">
+                <br>
+                <button *ngIf="estado" (click)="OpenDetails(Details)" class="btn btn-info" type="button">
+                    <i class="far fa-eye"></i>
+                    Ver Detalles
+                </button>
+				<button *ngIf="!estado" (click)="OpenDetailsOthers(OthersDetails)" class="btn btn-info" type="button">
+                    <i class="far fa-eye"></i>
+                    Ver Detalles
+                </button>
+
+				<ng-template #Details>
+                    <div class="modal-header">
+                        <h4 class="modal-title pull-left"><b>Detalles del Producto</b></h4>
+                        <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+						<h4 class="card-title"><b>{{Product.name}}</b></h4>
+						<hr>
+						<div class="card-body text-center">
+						<carousel [interval]="1500">
+							<slide *ngIf="Product.photoUrl!=''">
+							<img src="{{Product.photoUrl}}" loading="lazy" alt="first slide" style="display: block; width: 100%;">
+							</slide>
+							<slide *ngIf="Product.photoUrl2!=''">
+							<img src="{{Product.photoUrl2}}" loading="lazy" alt="second slide" style="display: block; width: 100%;">
+							</slide>
+							<slide *ngIf="Product.photoUrl3!=''">
+							<img src="{{Product.photoUrl3}}" loading="lazy" alt="third slide" style="display: block; width: 100%;">
+							</slide>
+							<slide *ngIf="Product.photoUrl=='' && Product.photoUrl2=='' && Product.photoUrl3==''">
+							<img src="/assets/images/imagen-no-disponible.png" alt="Sin imagen" style="display: block; width: 100%;">
+							</slide>
+						</carousel>
+						  <br><br>
+						  <h6><b>Marca</b></h6>
+						  <p>{{Product.marca}}</p>
+							<h6><b>Modelo</b></h6>
+							<p>{{Product.modelo}}</p>
+							<h6><b>Características</b></h6>
+							<p>{{Product.descrition}}</p>
+							<h6><b>Beneficios</b></h6>
+							<p>{{Product.benefits}}</p>
+							<h6><b>Desgaste de Banda de Rodamiento</b></h6>
+							<p>{{Product.treadwear}}</p>
+							<h6><b>Tracción</b></h6>
+							<p>{{Product.traction}}</p>
+							<h6><b>Temperatura</b></h6>
+							<p>{{Product.temperature}}</p>
+						  <hr>
+							<h5>Precio:&nbsp;<i class="fas fa-dollar-sign"></i> {{Product.price}}</h5>
+						  <hr>
+							<div class="container-fluid text-center">
+								<a href="https://wa.me/584126891586?text=¡Hola!%20Estoy%20interesado%20por%20el%20caucho%20{{Product.name}},%20marca%20{{Product.marca}}, modelo%20{{Product.modelo}}."
+								class="btn btn-success active" target="_blank" role="button" aria-pressed="true">
+								  <i class="fab fa-whatsapp"></i>&nbsp;<b>Comprar</b>
+								</a>
+							</div>
+						</div>
+					</div>
+				</ng-template>
+
+				<ng-template #OthersDetails>
+                    <div class="modal-header">
+                        <h4 class="modal-title pull-left"><b>Detalles del Producto</b></h4>
+                        <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef2.hide()">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+						<h4 class="card-title"><b>{{Product.name}}</b></h4>
+						<hr>
+						<div class="card-body text-center">
+						<carousel [interval]="1500">
+							<slide *ngIf="Product.photoUrl!=''">
+							<img src="{{Product.photoUrl}}" alt="first slide" style="display: block; width: 100%;">
+							</slide>
+							<slide *ngIf="Product.photoUrl2!=''">
+							<img src="{{Product.photoUrl2}}" alt="second slide" style="display: block; width: 100%;">
+							</slide>
+							<slide *ngIf="Product.photoUrl3!=''">
+							<img src="{{Product.photoUrl3}}" alt="third slide" style="display: block; width: 100%;">
+							</slide>
+							<slide *ngIf="Product.photoUrl=='' && Product.photoUrl2=='' && Product.photoUrl3==''">
+							<img src="/assets/images/imagen-no-disponible.png" alt="Sin imagen" style="display: block; width: 100%;">
+							</slide>
+						</carousel>
+						  <br><br>
+						  <h6><b>Marca</b></h6>
+						  <p>{{Product.marca}}</p>
+							<h6><b>Características</b></h6>
+							<p>{{Product.descrition}}</p>
+							<h6><b>¿Para qué vehículo aplica?</b></h6>
+							<p>{{Product.vehicle}}</p>
+							<h6><b>N° de parte</b></h6>
+							<p>{{Product.part}}</p>
+						  <hr>
+							<h5>Precio:&nbsp;<i class="fas fa-dollar-sign"></i> {{Product.price}}</h5>
+						  <hr>
+							<div class="container-fluid text-center">
+								<a href="https://wa.me/584126891586?text=¡Hola!%20Estoy%20interesado%20por%20el%20repuesto%20{{Product.name}},%20de%20marca%20{{Product.marca}}."
+								class="btn btn-success active" target="_blank" role="button" aria-pressed="true">
+								  <i class="fab fa-whatsapp"></i>&nbsp;<b>Comprar</b>
+								</a>
+							</div>
+						</div>
+					</div>
+				</ng-template>
+
+				<br><br>
+			</div>
+        </div>
+    </div>
+</ng-template>
+
+<ng-template #authenticated>
+
+    <div class="card-deck">
+        <div class="card">
+            <div class="card-header">
+              <b *ngIf="!estado">
+                {{Product.name}}
+              </b>
+              <b *ngIf="estado">
+                {{Product.name}}<br>
+                {{Product.marca}}<br>
+                {{Product.modelo}}
+              </b>
+            </div>
+            <div class="container-fluid">
+				<carousel>
+				  <slide *ngIf="Product.photoUrl!=''">
+					<img src="{{Product.photoUrl}}" alt="first slide" loading="lazy" style="display: block; width: 100%;">
+				  </slide>
+				  <slide *ngIf="Product.photoUrl2!=''">
+					<img src="{{Product.photoUrl2}}" alt="second slide" loading="lazy" style="display: block; width: 100%;">
+				  </slide>
+				  <slide *ngIf="Product.photoUrl3!=''">
+					<img src="{{Product.photoUrl3}}" alt="third slide" loading="lazy" style="display: block; width: 100%;">
+				  </slide>
+				  <slide *ngIf="Product.photoUrl=='' && Product.photoUrl2=='' && Product.photoUrl3==''">
+					<img src="/assets/images/imagen-no-disponible.png" loading="lazy" alt="Sin imagen" style="display: block; width: 100%;">
+				  </slide>
+				</carousel>
+            </div>
+            <div class="card-footer">
+                <br>
+                <button (click)="OpenDetailsAdmin(DetailsAdmin)" class="btn btn-info" type="button">
+                    <i class="far fa-eye"></i>
+                    Ver Detalles
+                </button>
+
+                <hr>
+
+                <button (click)="OpenEdit(Edit, Product)" class="btn btn-success" type="button">Editar
+                    <i class="fas fa-edit"></i>
+                </button>
+
+                <br><br>
+
+                <div *ngIf="Product.disponibility === true">
+                    <button (click)="removeAvaliable(Product)" class="btn btn-danger" type="button" style="background-color: #ff4d4d; border-color: #ff4d4d;">Quitar <br> Disponibilidad
+                        <i class="fas fa-backspace"></i>
+                    </button>
+                </div>
+                <div *ngIf="Product.disponibility === false">
+                    <button (click)="OpenConfirmation(Confirmtemplate)" class="btn btn-danger" type="button"
+					style="background-color: #ff4d4d; border-color: #ff4d4d;"> Borrar
+                        <i class="fas fa-trash-alt"></i>
+                    </button>
+                    <br><br>
+                    <button (click)="addAvaliable(Product)" class="btn btn-info" type="button"> Agregar <br>Disponibilidad
+                        <i class="fas fa-backspace"></i>
+                    </button>
+                </div>
+                <br>
+
+                <ng-template #DetailsAdmin>
+                    <div class="modal-header">
+                        <h4 class="modal-title pull-left"><b>{{Product.name}}</b></h4>
+                        <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef5.hide()">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                      <h6><b>Marca</b></h6>
+                      <p>{{Product.marca}}</p>
+                      <div *ngIf="estado">
+                        <h6><b>Modelo</b></h6>
+                        <p>{{Product.modelo}}</p>
+                        <h6><b>Características</b></h6>
+                        <p>{{Product.descrition}}</p>
+                        <h6><b>Beneficios</b></h6>
+                        <p>{{Product.benefits}}</p>
+                        <h6><b>Desgaste de Banda de Rodamiento</b></h6>
+                        <p>{{Product.treadwear}}</p>
+                        <h6><b>Tracción</b></h6>
+                        <p>{{Product.traction}}</p>
+                        <h6><b>Temperatura</b></h6>
+                        <p>{{Product.temperature}}</p>
+                      </div>
+                      <div *ngIf="!estado">
+                        <h6><b>Características</b></h6>
+                        <p>{{Product.descrition}}</p>
+                        <h6><b>¿Para qué vehículo aplica?</b></h6>
+                        <p>{{Product.vehicle}}</p>
+                        <h6><b>N° de parte</b></h6>
+                        <p>{{Product.vehicle}}</p>
+                      </div>
+                        <hr>
+                        <i class="fas fa-dollar-sign"></i> {{Product.price}}
+                    </div>
+                </ng-template>
+
+                <ng-template #Edit>
+                    <div class="modal-header">
+                        <h4 class="modal-title pull-left"><b>Formulario de Edición</b></h4>
+                        <button type="button" class="close pull-right" aria-label="Close" (click)="this.modalRef3.hide();decline()">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="container-fluid text-center">
+                          <form #f="ngForm" class="form" id="ProductForm">
+                            <div class="row">
+                                <div class="col-sm-6">
+                      						<carousel [showIndicators]="showIndicator" [noPause]="false" [noWrap]="noWrapSlides">
+                      						  <slide>
+                      								<img class="card-img" *ngIf="Product.photoUrl=='' && this.imageUrl==null" loading="lazy" class="rounded" src="/assets/images/imagen-no-disponible.png" alt="Card image" style="display: block; width: 100%;">
+                      								<img class="card-img" *ngIf="Product.photoUrl!='' && this.imageUrl==null" loading="lazy" class="rounded" src="{{Product.photoUrl}}" alt="Card image" style="display: block; width: 100%;">
+                      								<img class="card-img" *ngIf="this.imageUrl!=null" class="rounded" loading="lazy" src="{{this.imageUrl}}" alt="Card image" style="display: block; width: 100%;">
+                      								<small>Seleccione la foto #1 para el producto</small>
+                      								<br>
+                      								<div class="container">
+
+                      									<progressbar [value]="uploadProgress| async" type="primary" [striped]="true" [animate]="true"></progressbar>
+
+                      									<div class="item">
+                      										{{ (uploadProgress | async) / 100 | percent }}
+                      									</div>
+                      									<br>
+
+                      									<div class="item">
+
+                      										<input #inputFile class="hidden" type="file" (change)="upload($event)" accept=".png,.jpg,.jpeg">
+
+                      										<button type="button" class="btn btn-lg btn-success" (click)="inputFile.click();isPic1()">
+                      														Subir foto
+                      														<i class="fas fa-upload"></i>
+                      										</button><br><br>
+                      									</div>
+                      								</div>
+                      						  </slide>
+                      						  <slide>
+                      								<img class="card-img" *ngIf="Product.photoUrl2=='' && this.imageUrl2==null" loading="lazy" class="rounded" src="/assets/images/imagen-no-disponible.png" alt="Card image" style="display: block; width: 100%;">
+                      								<img class="card-img" *ngIf="Product.photoUrl2!='' && this.imageUrl2==null" loading="lazy" class="rounded" src="{{Product.photoUrl2}}" alt="Card image" style="display: block; width: 100%;">
+                      								<img class="card-img" *ngIf="this.imageUrl2!=null" class="rounded" loading="lazy" src="{{this.imageUrl2}}" alt="Card image" style="display: block; width: 100%;">
+                      								<small>Seleccione la foto #2 para el producto</small>
+                      								<br>
+                      								<div class="container">
+
+                      									<progressbar [value]="uploadProgress2| async" type="primary" [striped]="true" [animate]="true"></progressbar>
+
+                      									<div class="item">
+                      										{{ (uploadProgress2 | async) / 100 | percent }}
+                      									</div>
+                      									<br>
+
+                      									<div class="item">
+                      										<input #inputFile class="hidden" type="file" (change)="upload($event)" accept=".png,.jpg,.jpeg">
+
+                      										<button type="button" class="btn btn-lg btn-success" (click)="inputFile.click();isPic2()">
+                      														Subir foto
+                      														<i class="fas fa-upload"></i>
+                      										</button><br><br>
+                      									</div>
+                      								</div>
+                      						  </slide>
+                      						  <slide>
+                      								<img class="card-img" *ngIf="Product.photoUrl3=='' && this.imageUrl3==null" loading="lazy" class="rounded" src="/assets/images/imagen-no-disponible.png" alt="Card image" style="display: block; width: 100%;">
+                      								<img class="card-img" *ngIf="Product.photoUrl3!='' && this.imageUrl3==null" loading="lazy" class="rounded" src="{{Product.photoUrl3}}" alt="Card image" style="display: block; width: 100%;">
+                      								<img class="card-img" *ngIf="this.imageUrl3!=null" class="rounded" loading="lazy" src="{{this.imageUrl3}}" alt="Card image" style="display: block; width: 100%;">
+                      								<small>Seleccione la foto #3 para el producto</small>
+                      								<br>
+                      								<div class="container">
+
+                      									<progressbar [value]="uploadProgress3| async" type="primary" [striped]="true" [animate]="true"></progressbar>
+
+                      									<div class="item">
+                      										{{ (uploadProgress3 | async) / 100 | percent }}
+                      									</div>
+                      									<br>
+
+                      									<div class="item">
+
+                      										<input #inputFile class="hidden" type="file" (change)="upload($event)" accept=".png,.jpg,.jpeg">
+
+                      										<button type="button" class="btn btn-lg btn-success" (click)="inputFile.click();isPic3()">
+                      														Subir foto
+                      														<i class="fas fa-upload"></i>
+                      										</button><br><br>
+                      									</div>
+                      								</div>
+                      						  </slide>
+                      						</carousel>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="tab-content">
+                                      <h5><b>Datos Generales</b></h5><hr>
+                                      <div class="form-group">
+                                        <div class="col-xs-6">
+                                            <label for="name"><h6><b>Nombre</b></h6></label>
+                                            <input [(ngModel)]="nameValue" #name="ngModel" ngModel type="text" class="form-control" name="name" id="name" placeholder="Nombre del producto">
+                                        </div>
+                                      </div>
+                                      <div class="form-group">
+                                        <div class="col-xs-6">
+                                            <label for="marca"><h6><b>Marca</b></h6></label>
+                                            <input [(ngModel)]="marcaValue" #marca="ngModel" ngModel type="text" class="form-control" name="marca" id="marca" placeholder="Marca del producto">
+                                        </div>
+                                      </div>
+                                      <div class="form-group" *ngIf="estado">
+                                        <div class="col-xs-6">
+                                            <label for="modelo"><h6><b>Modelo</b></h6></label>
+                                            <input [(ngModel)]="modeloValue" #modelo="ngModel" ngModel type="text" class="form-control" name="modelo" id="modelo" placeholder="Modelo del producto">
+                                        </div>
+                                      </div>
+                                      <div class="form-group" *ngIf="!estado">
+                                        <div class="col-xs-6">
+                                            <label for="part"><h6><b>N° de parte</b></h6></label>
+                                            <input [(ngModel)]="partValue" #part="ngModel" ngModel type="text" class="form-control" name="part" id="part" placeholder="Número de parte del producto">
+                                        </div>
+                                      </div>
+                                      <div class="form-group">
+                                          <div class="col-xs-6">
+                                              <label for="precio"><h6><b>Precio</b></h6></label>
+                                              <input [(ngModel)]="priceValue" #precio="ngModel" ngModel type="number" class="form-control" name="precio" id="precio" placeholder="Introduzca el precio">
+                                          </div>
+                                      </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <h5><b>Descripción del producto</b></h5><hr>
+                            <div class="form-group">
+                                <div class="col-xs-6">
+                                    <label for="descripcion"><h6><b>Características</b></h6></label>
+                                    <textarea [(ngModel)]="descriptionValue" #descripcion="ngModel" ngModel type="text" class="form-control" name="descripcion" id="descripcion" placeholder="Descripción del producto"></textarea>
+                                </div>
+                            </div>
+                            <div class="form-group" *ngIf="!estado">
+                                <div class="col-xs-6">
+                                    <label for="vehicle"><h6><b>¿Para qué vehículo aplica?</b></h6></label>
+                                    <textarea [(ngModel)]="vehicleValue" #vehicle="ngModel" ngModel type="text" class="form-control" name="vehicle" id="vehicle" placeholder="Vehículo al que aplica"></textarea>
+                                </div>
+                            </div>
+                            <div *ngIf="!estado">
+                              <br><h5><b>¿Qué tipo de repuesto es?</b></h5><hr>
+                              <div class="form-group">
+                                <label for="categoria"><h4>Categoria</h4></label><br>
+                                  <select class="browser-default custom-select" name="categoria" [(ngModel)]="categoriaValue">
+                                    <option value="Tren">Tren Delantero</option>
+                                    <option value="Amortiguadores">Amortiguadores</option>
+                                    <option value="Frenos">Frenos</option>
+                                    <option value="Filtros">Filtros</option>
+                                    <option value="Croches">Croches</option>
+                                    <option value="Otros">Otros</option>
+                                  </select>
+                              </div>
+                              <br><br>
+                            </div>
+                            <div class="form-group" *ngIf="estado">
+                                <div class="col-xs-6">
+                                    <label for="benefits"><h6><b>Beneficios</b></h6></label>
+                                    <textarea [(ngModel)]="benefitsValue" #benefits="ngModel" ngModel type="text" class="form-control" name="benefits" id="benefits" placeholder="Beneficios del producto"></textarea>
+                                </div>
+                            </div>
+                            <div class="form-group" *ngIf="estado">
+                                <div class="col-xs-6">
+                                    <label for="treadwear"><h6><b>Desgaste de Banda de Rodamiento</b></h6></label>
+                                    <input [(ngModel)]="treadwearValue" #treadwear="ngModel" ngModel type="text" class="form-control" name="treadwear" id="treadwear" placeholder="Desgaste del rodamiento del caucho">
+                                </div>
+                            </div>
+                            <div class="form-group" *ngIf="estado">
+                                <div class="col-xs-6">
+                                    <label for="traction"><h6><b>Tracción</b></h6></label>
+                                    <input [(ngModel)]="tractionValue" #traction="ngModel" ngModel type="text" class="form-control" name="traction" id="traction" placeholder="Tracción del caucho">
+                                </div>
+                            </div>
+                            <div class="form-group" *ngIf="estado">
+                                <div class="col-xs-6">
+                                    <label for="temperature"><h6><b>Temperatura</b></h6></label>
+                                    <input [(ngModel)]="temperatureValue" #temperature="ngModel" ngModel type="text" class="form-control" name="temperature" id="temperature" placeholder="Temperatura">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-xs-12">
+                                    <br>
+                                    <button class="btn btn-primary" (click)="updateProduct(f)" type="submit">Actualizar
+                                            <i class="fas fa-sync-alt"></i>
+                                    </button>
+                                    <button class="btn btn-cancelar btn-danger" (click)="this.modalRef3.hide();decline()">Cancelar
+                                            <i class="far fa-times-circle"></i>
+                                    </button>
+                                </div>
+                            </div>
+                          </form>
+                        </div>
+                    </div>
+                </ng-template>
+
+                <ng-template #Confirmtemplate>
+                    <div class="modal-header">
+                        <h4 class="modal-title pull-left">Confirmar acción</h4>
+                        <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef4.hide()">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                        ¿Desea borrar de forma permanente el producto seleccionado?
+                        <br><br>
+                        <button (click)="delete(Product)" class="btn btn-success" type="button">Sí</button>
+                        <button (click)="modalRef4.hide()" class="btn btn-danger btn-cancelar" type="button">No</button>
+                    </div>
+                </ng-template>
+
+            </div>
+        </div>
+    </div>
+</ng-template>

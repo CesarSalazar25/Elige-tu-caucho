@@ -1,0 +1,62 @@
+@media (max-width: 1366px) {
+    img {
+        height: 300px;
+    }
+}
+
+@media (max-width: 414px) {
+    img {
+        height: 300px;
+    }
+    carousel{
+      width: 100% !important;
+    }
+}
+
+@media (min-width: 1400px) {
+    img {
+        height: 300px;
+    }
+}
+
+.createProduct
+{
+	text-align: center;
+}
+
+.modal-header
+{
+    background: #dc3545;
+		color: antiquewhite;
+}
+
+.row
+{
+    padding: 20px;
+}
+
+.hidden
+{
+    display: none;
+}
+
+.btn-cancelar
+{
+    margin-left:10px;
+}
+
+img
+{
+    height: 300px;
+    width: 300px;
+}
+
+.btn-danger
+{
+	 margin-left: 10px;
+}
+
+h3 {
+	color: #9b948c;
+}
+
